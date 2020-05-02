@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather App</title>
+    <link rel="stylesheet" href="src/styles.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="weather-app">
+        <form id="searchCity">
+          <div class="row">
+            <div class="col-6">
+              <input
+                type="search"
+                placeholder="Enter a city..."
+                autofocus="on"
+                autocomplete="off"
+                class="form-control shadow-sm"
+                id="input-city"
+              />
+            </div>
+            <div class="col-3">
+              <input
+                type="submit"
+                value="Search"
+                class="form-control btn btn-primary shadow-sm"
+              />
+            </div>
+            <div class="col-3">
+              <button class="btn btn-success w-100" id="current-location-btn">
+                Current
+              </button>
+            </div>
+          </div>
+        </form>
+        <h1 id="current-city"></h1>
+        <h2>
+          <span id="description"></span>
+          <img
+            src="https://ssl.gstatic.com/onebox/weather/48/sunny.png"
+            alt="Weather condition image"
+            id="currentIcon"
+          />
+        </h2>
+        <p>
+          <span id="currentTemp"></span>
+          <span id="units">
+            <a href="#" id="celsius">ºC</a> | <a href="#" id="fahrenheit">ºF</a>
+          </span>
+        </p>
+        <div class="row">
+          <div class="col-6 date">
+            <span id="currentWeekDay">Weekday</span><br />
+            <span id="month">Month</span> <span id="date"> date</span> <br />
+            <span id="time">00:00</span>
+          </div>
+          <div class="col-6 conditions">
+            Chance of rain: 10% <br />
+            Humidity: <span id="humidity"></span>%<br />
+            Wind: <span id="wind"></span> km/h
+          </div>
+        </div>
+        <hr />
+        <div class="row">
+          <div class="col-2 days">
+            Mon
+            <br />
+            <div class="maxMinTemp">
+              19ºC - 10ºC
+            </div>
+            <br />
+            <img
+              src="https://ssl.gstatic.com/onebox/weather/48/partly_cloudy.png"
+              alt="Weather condition image"
+            />
+          </div>
+          <div class="col-2 days">
+            Tue
+            <br />
+            <div class="maxMinTemp">
+              21ºC - 10ºC
+            </div>
+            <br />
+            <img
+              src="https://ssl.gstatic.com/onebox/weather/48/rain.png"
+              alt="Weather condition image"
+            />
+          </div>
+          <div class="col-2 days">
+            Wed
+            <br />
+            <div class="maxMinTemp">
+              21ºC - 11ºC
+            </div>
+            <br />
+            <img
+              src="https://ssl.gstatic.com/onebox/weather/48/cloudy.png"
+              alt="Weather condition image"
+            />
+          </div>
+          <div class="col-2 days">
+            Thu
+            <br />
+            <div class="maxMinTemp">
+              18ºC - 9ºC
+            </div>
+            <br />
+            <img
+              src="https://ssl.gstatic.com/onebox/weather/48/sunny.png"
+              alt="Weather condition image"
+            />
+          </div>
+          <div class="col-2 days">
+            Fri
+            <br />
+            <div class="maxMinTemp">
+              18ºC - 9ºC
+            </div>
+            <br />
+            <img
+              src="https://ssl.gstatic.com/onebox/weather/48/rain_light.png"
+              alt="Weather condition image"
+            />
+          </div>
+          <div class="col-2 days">
+            Sat
+            <br />
+            <div class="maxMinTemp">
+              20ºC - 10ºC
+            </div>
+            <br />
+            <img
+              src="https://ssl.gstatic.com/onebox/weather/48/rain_light.png"
+              alt="Weather condition image"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="src/script.js"></script>
+  </body>
+</html>
