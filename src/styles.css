@@ -43,3 +43,10 @@ p {
 .maxMinTemp {
   font-size: small;
 }
+
+#github-link {
+  font-size: 11px;
+  position: relative;
+  left: 170px;
+  top: -20px;
+}
