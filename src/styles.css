@@ -53,6 +53,13 @@ p {
   text-decoration: none;
 }
 
+.weather-forecast img {
+  display: block;
+  margin: 0 auto;
+  height: 48px;
+  width: 48px;
+}
+
 #currentTemp {
   font-size: 45px;
   font-weight: 400;
