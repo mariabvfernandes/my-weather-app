@@ -1,18 +1,17 @@
-.weather-app {
-  margin: 20px auto;
-  border: 1px solid #d9d9d9;
-  max-width: 600px;
-  border-radius: 8px;
-  padding: 20px;
-  font-family: "Ubuntu", sans-serif;
-}
-
 h1 {
   color: black;
-  font-size: 35px;
+  font-size: 32px;
   font-weight: 100;
   line-height: 28px;
-  padding-top: 20px;
+  padding-top: 30px;
+}
+
+h2 {
+  margin-bottom: 0;
+  color: black;
+  font-size: 25px;
+  font-weight: 50;
+  line-height: 28px;
 }
 
 h1,
@@ -21,15 +20,16 @@ p {
   text-align: center;
 }
 
-#currentTemp {
-  font-size: 45px;
-  font-weight: 400;
-  line-height: 1;
+.weather-app-wrapper {
+  max-width: 600px;
+  margin: 30px auto;
 }
 
-#units {
-  position: relative;
-  top: -20px;
+.weather-app {
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+  padding: 20px;
+  font-family: "Ubuntu", sans-serif;
 }
 
 .conditions {
@@ -44,9 +44,22 @@ p {
   font-size: small;
 }
 
-#github-link {
-  font-size: 11px;
+.active {
+  color: black;
+  cursor: default;
+}
+
+.active:hover {
+  text-decoration: none;
+}
+
+#currentTemp {
+  font-size: 45px;
+  font-weight: 400;
+  line-height: 1;
+}
+
+#units {
   position: relative;
-  left: 170px;
   top: -20px;
 }

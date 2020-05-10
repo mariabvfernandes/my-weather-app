@@ -1,29 +1,55 @@
-function displayDate() {
-  let now = new Date();
-  let weekDay = document.querySelector("#currentWeekDay");
-  weekDay.innerHTML = `${days[now.getDay()]}`;
-  let month = document.querySelector("#month");
-  month.innerHTML = `${months[now.getMonth()]}`;
-  let date = document.querySelector("#date");
-  date.innerHTML = `${now.getDate()}`;
-  let time = document.querySelector("#time");
+function displayDate(timestamp) {
+  let date = new Date(timestamp);
+  let days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+  let weekDay = days[date.getDay()];
+  let months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+  let month = months[date.getMonth()];
+  let day = date.getDate();
+
+  return `${weekDay}, ${month} ${day}`;
+}
+
+function displayTime(timestamp) {
+  let now = new Date(timestamp);
   let hours = now.getHours();
-  let minutes = now.getMinutes();
-  time.innerHTML = `${hours}:${minutes}`;
   if (hours < 10) {
-    hours = `0${minutes}`;
+    hours = `0${hours}`;
   }
+  let minutes = now.getMinutes();
   if (minutes < 10) {
     minutes = `0${minutes}`;
   }
+  return `${hours}:${minutes}`;
 }
 
-//problem with hours and minutes when below 10!!! not solved yet
+//date and time still not working properly. what about eg Australia? Also time is wrong, always behind when updated
 
 function changeCurrentTemp(response) {
+  celsiusTemperature = response.data.main.temp;
   document.querySelector("#current-city").innerHTML = response.data.name;
   document.querySelector("#currentTemp").innerHTML = Math.round(
-    response.data.main.temp
+    celsiusTemperature
   );
   document.querySelector("#humidity").innerHTML = response.data.main.humidity;
   document.querySelector("#wind").innerHTML = Math.round(
@@ -31,6 +57,18 @@ function changeCurrentTemp(response) {
   );
   document.querySelector("#description").innerHTML =
     response.data.weather[0].main;
+  document.querySelector("#date").innerHTML = displayDate(
+    response.data.dt * 1000
+  );
+  document.querySelector("#time").innerHTML = displayTime(
+    response.data.dt * 1000
+  );
+  let currentIcon = document.querySelector("#current-icon");
+  currentIcon.setAttribute(
+    "src",
+    `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+  );
+  currentIcon.setAttribute("alt", response.data.weather[0].description);
 }
 
 function search(city) {
@@ -48,15 +86,18 @@ function changeCity(event) {
 function clickFahrenheit(event) {
   event.preventDefault();
   let temperatureElement = document.querySelector("#currentTemp");
-  let temperature = temperatureElement.innerHTML;
-  temperature = Number(temperature);
-  temperatureElement.innerHTML = Math.round((temperature * 9) / 5 + 32);
+  celsiusIcon.classList.remove("active");
+  fahrenheitIcon.classList.add("active");
+  let fahrenheitTemperature = (celsiusTemperature * 9) / 5 + 32;
+  temperatureElement.innerHTML = Math.round(fahrenheitTemperature);
 }
 
 function clickCelsius(event) {
   event.preventDefault();
-  let tempC = document.querySelector("#currentTemp");
-  tempC.innerHTML = `19`;
+  celsiusIcon.classList.add("active");
+  fahrenheitIcon.classList.remove("active");
+  let temperatureElement = document.querySelector("#currentTemp");
+  temperatureElement.innerHTML = Math.round(celsiusTemperature);
 }
 
 function searchCurrentLocation(position) {
@@ -75,30 +116,7 @@ function getLocation(event) {
 let currentLocationBtn = document.querySelector("#current-location-btn");
 currentLocationBtn.addEventListener("click", getLocation);
 
-let days = [
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
-];
-
-let months = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December",
-];
+let celsiusTemperature = null;
 
 let searchCity = document.querySelector("#searchCity");
 searchCity.addEventListener("submit", changeCity);
@@ -108,7 +126,5 @@ fahrenheitIcon.addEventListener("click", clickFahrenheit);
 
 let celsiusIcon = document.querySelector("#celsius");
 celsiusIcon.addEventListener("click", clickCelsius);
-
-displayDate();
 
 search("Lisbon");
